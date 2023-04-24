@@ -6,7 +6,7 @@ import {
   fetchAsyncMovieOrShowDetail,
   getSelectedMovieOrShow,
   removeSelectedMovieOrShow,
-} from "../../features/movies/movieSlice";
+} from "../../store/movieSlice";
 
 const MovieDetail = () => {
   const { imdbID } = useParams();
