@@ -67,7 +67,7 @@ const Header = () => {
           duration: 0.2,
         }}
         className={cn(
-          "transition-all duration-300 flex max-w-full md:min-w-full lg:min-w-full fixed z-[5000] top-0 inset-x-0  px-10 py-3"
+          "transition-all duration-300 flex max-w-full md:min-w-full lg:min-w-full fixed z-[5000] top-0 inset-x-0  px-10 py-4"
         )}
         style={{
           backdropFilter: visible ? "" : "blur(16px) saturate(180%)",
@@ -80,35 +80,7 @@ const Header = () => {
     <header className="flex w-full">
       <div className="container mx-auto px-3 flex items-center h-full">
         <Link to={"/"}>
-          <svg
-            width="130"
-            height="50"
-            viewBox="0 0 800 300"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="50,50 50,250 200,150"
-              stroke="orange"
-              stroke-width="15"
-              fill="none"
-            />
-
-            <polyline
-              points="100,125 150,150 100,175"
-              stroke="orange"
-              stroke-width="15"
-              fill="none"
-            />
-            <text
-              x="250"
-              y="200"
-              font-family="Arial"
-              font-size="150"
-              fill="rgb(225, 120, 40)"
-            >
-              RMDB
-            </text>
-          </svg>
+        <h1 class="bg-gradient-to-r font-extrabold text-2xl to-cyan-300 from-green-200 inline-block text-transparent bg-clip-text">RMDB</h1>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1 ml-5">
