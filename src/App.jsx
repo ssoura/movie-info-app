@@ -1,27 +1,51 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import PageNotFound from "./components/PageNotFound/PageNotFound";
-import MovieDetail from "./components/MovieDetail/MovieDetail";
-import "./App.scss";
+import { Outlet } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import MobileNavigation from './components/MobileNavigation';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setBannerData,setImageURL } from './store/movieSlice';
+
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  const fetchTrendingData = async()=>{
+    try {
+        const response = await axios.get('/trending/all/week')
+
+        dispatch(setBannerData(response.data.results))
+    } catch (error) {
+        console.log("error",error)
+    }
+  }
+
+  const fetchConfiguration = async()=>{
+    try {
+        const response = await axios.get("/configuration")
+
+        dispatch(setImageURL(response.data.images.secure_base_url+"original"))
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(()=>{
+    fetchTrendingData()
+    fetchConfiguration()
+  },[])
   return (
-    <div className="app">
-      <Router>
-        <Header />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movie/:imdbID" element={<MovieDetail />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+    <main className='pb-14 lg:pb-0'>
+        <Header/>
+        <div className='min-h-[90vh]'>
+            <Outlet/>
         </div>
-        <Footer />
-      </Router>
-    </div>
+        <Footer/>
+        <MobileNavigation/>
+    </main>
   );
 }
 
